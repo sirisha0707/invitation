@@ -4,8 +4,7 @@
   "description": "- nodeJS\r - npm install express puppeteer body-parser multer\r ## To run application\r - Goto application's folder location and run `node server.js`",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "postinstall": "node node_modules/puppeteer/install.mjs"
+    "start": "node server.js"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
