@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctor's Day Poster</title>
+  <style>
+    html {
+      height: 100%;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #475c62;
+      border: 10px solid #fff;
+      min-height: 98%;
+      margin: 0px;
+      font-size: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .poster {
+      color: #fff;
+      padding: 1em;
+      border-radius: 10px;
+      text-align: center;
+      position: relative;
+    }
+
+    .poster h2 {
+      margin-top: 2.5em;
+      font-size: 2.5em;
+      font-weight: normal;
+      color: #fff;
+      font-family: cursive;
+    }
+
+    .poster h1 {
+      font-size: 3em;
+      margin: 0.5em 0;
+      font-weight: 700;
+      color: #fff;
+      font-family: cursive;
+    }
+
+    .profile-pic {
+      border: 5px solid #b2ced5;
+      border-radius: 50%;
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      margin: 4em auto;
+      margin-bottom: 2em;
+      display: block;
+    }
+
+    .name {
+      font-size: 2.3em;
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+
+    .title {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+
+    .footer {
+      font-size: 14px;
+      margin-top: 20px;
+      color: #fff;
+      width: 100%;
+      height: 100px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .section {
+      margin-left: 7em;
+      text-align: center;
+      margin-right: 7em;
+    }
+
+    .section p {
+      margin: 4px;
+      color: #fff;
+      font-size: 1.3em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="poster">
+    <h2>“Wherever the art of medicine is loved, <br>there is also a love of humanity.”</h2>
+    <h1>Happy Doctor's Day</h1>
+    <img src="{{photo}}" alt="Uploaded Photo" class="profile-pic" width="150" height="150"/>
+    <div class="name">{{name}}</div>
+    <div class="title">{{designation}}</div>
+  </div>
+  <div class="footer">
+    <div class="section">
+        <p>NATIONAL</p>
+        <p style="font-weight: bold;font-size: 1.5em;">DOCTOR'S DAY</p>
+        <p>1<sup>st</sup> July <script>document.write(new Date().getFullYear())</script></p>
+    </div>
+    <div class="section">
+      <p>Initiative by:</p>
+      <img src="{{baseUrl}}/assets/logo.png" alt="bevilin" height="75px">
+    </div>
+  </div>
+</body>
+</html>
