@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Template PDF Generator</title>
+  <style>
+    label {
+      display: inline-block;
+      width: 140px;
+    }
+    select {
+      width: 170px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Generate PDF from Template</h1>
+
+  <form method="POST" action="/generate-pdf" enctype="multipart/form-data">
+    <!-- Template selector -->
+    <label for="template">Choose Template:</label>
+    <select name="template" id="template" required>
+      <option value="doctors-day.html">Doctor's day</option>
+      <option value="healthday.html">Health day</option>
+    </select>
+    <br><br>
+    <!-- Form fields -->
+    <label for="name">Name:</label>
+    <input name="name" id="name" placeholder="Your name" required/><br/><br>
+
+    <label for="designation">Designation:</label>
+    <input name="designation" id="designation" placeholder="Your designation" required/><br/><br>
+    
+    <!-- File upload -->
+    <label for="photo">Upload photo:</label>
+    <input type="file" name="photo" id="photo" accept="image/*" required/><br/><br/><br>
+
+    <button type="submit">Generate PDF</button>
+  </form>
+</body>
+</html>
