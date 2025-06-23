@@ -11,7 +11,7 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "multer": "^2.0.1",
-    "puppeteer": "21.3.8"
+    "puppeteer": "^24.10.2"
   },
   "author": "",
   "license": "ISC"
