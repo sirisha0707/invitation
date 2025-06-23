@@ -51,28 +51,27 @@ app.post('/generate-pdf', upload.single('photo'), async (req, res) => {
     return res.status(404).send('Template not found');
   }
 
-  // Read HTML template
   let html = fs.readFileSync(templatePath, 'utf8');
 
-  // Convert photo to base64 and inject into template
   if (req.file) {
     const base64Image = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
     formData.photo = base64Image;
   } else {
-    formData.photo = ''; // Optional placeholder
+    formData.photo = '';
   }
 
-  // Replace placeholders in template (e.g., {{name}}, {{photo}}, etc.)
   Object.entries(formData).forEach(([key, value]) => {
     const regex = new RegExp(`{{${key}}}`, 'g');
     html = html.replace(regex, value);
   });
 
   try {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
 
-    // Inject processed HTML content directly
+    const page = await browser.newPage();
     await page.setContent(html, { waitUntil: 'networkidle0' });
 
     const pdfBuffer = await page.pdf({
