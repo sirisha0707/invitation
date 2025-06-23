@@ -9,6 +9,7 @@ require('dotenv').config();
 const app = express();
 const PORT = 3000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
+const executablePath = '/opt/render/.cache/puppeteer/chrome-headless-shell/linux-137.0.7151.119/chrome-linux64/chrome';
 
 // Multer setup for file upload (in memory)
 const upload = multer({ storage: multer.memoryStorage() });
@@ -67,6 +68,7 @@ app.post('/generate-pdf', upload.single('photo'), async (req, res) => {
 
   try {
     const browser = await puppeteer.launch({
+      executablePath,
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
