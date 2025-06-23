@@ -67,6 +67,7 @@ app.post('/generate-pdf', upload.single('photo'), async (req, res) => {
 
   try {
     const browser = await puppeteer.launch({
+      executablePath: puppeteer.executablePath(),
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
