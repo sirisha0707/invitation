@@ -8,6 +8,7 @@ require('dotenv').config();
 
 const app = express();
 const PORT = 3000;
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 // Multer setup for file upload (in memory)
 const upload = multer({ storage: multer.memoryStorage() });
@@ -38,7 +39,6 @@ app.get('/preview', (req, res) => {
 // Generate PDF from template + image
 app.post('/generate-pdf', upload.single('photo'), async (req, res) => {
   const { template, ...formData } = req.body;
-  const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
   formData.baseUrl = BASE_URL;
 
   if (!template) {
