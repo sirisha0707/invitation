@@ -96,5 +96,5 @@ app.post('/generate-pdf', upload.single('photo'), async (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running: http://localhost:${PORT}/index.html`);
+  console.log(`Server running: ${BASE_URL}/index.html`);
 });
