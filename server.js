@@ -57,6 +57,15 @@ app.post('/generate-pdf', upload.single('photo'), async (req, res) => {
     formData.photo = '';
   }
 
+  const logoPath = path.join(__dirname, 'public/assets/logo.png');
+  if (fs.existsSync(logoPath)) {
+    const logoBuffer = fs.readFileSync(logoPath);
+    const logoBase64 = `data:image/png;base64,${logoBuffer.toString('base64')}`;
+    formData.logoImage = logoBase64;
+  } else {
+    formData.logoImage = '';
+  }
+
   Object.entries(formData).forEach(([key, value]) => {
     const regex = new RegExp(`{{${key}}}`, 'g');
     html = html.replace(regex, value);
