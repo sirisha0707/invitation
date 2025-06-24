@@ -1,16 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
+const pdf = require('html-pdf-node'); // New plugin
 require('dotenv').config();
 
 const app = express();
 const PORT = 3000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
-// Multer setup for file upload (in memory)
 const upload = multer({ storage: multer.memoryStorage() });
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,10 +17,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
 
-// Render preview in browser (for testing, not used in PDF generation anymore)
+// Preview route (unchanged)
 app.get('/preview', (req, res) => {
   const templatePath = path.join(__dirname, 'templates', req.query.template || 'template.html');
-
   if (!fs.existsSync(templatePath)) {
     return res.status(404).send('Template not found');
   }
@@ -36,7 +34,7 @@ app.get('/preview', (req, res) => {
   res.send(html);
 });
 
-// Generate PDF from template + image
+// PDF generation using html-pdf-node
 app.post('/generate-pdf', upload.single('photo'), async (req, res) => {
   const { template, ...formData } = req.body;
   formData.baseUrl = BASE_URL;
@@ -46,7 +44,6 @@ app.post('/generate-pdf', upload.single('photo'), async (req, res) => {
   }
 
   const templatePath = path.join(__dirname, 'templates', template);
-
   if (!fs.existsSync(templatePath)) {
     return res.status(404).send('Template not found');
   }
@@ -65,21 +62,13 @@ app.post('/generate-pdf', upload.single('photo'), async (req, res) => {
     html = html.replace(regex, value);
   });
 
+  const file = { content: html };
+
   try {
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
-    });
-
-    const page = await browser.newPage();
-    await page.setContent(html, { waitUntil: 'networkidle0' });
-
-    const pdfBuffer = await page.pdf({
+    const pdfBuffer = await pdf.generatePdf(file, {
       format: 'A4',
       printBackground: true,
     });
-
-    await browser.close();
 
     res.set({
       'Content-Type': 'application/pdf',

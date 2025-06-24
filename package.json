@@ -1,7 +1,7 @@
 {
   "name": "invitation",
   "version": "1.0.0",
-  "description": "- nodeJS\r - npm install express puppeteer body-parser multer\r ## To run application\r - Goto application's folder location and run `node server.js`",
+  "description": "Generates pdf with given data.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -10,8 +10,8 @@
     "body-parser": "^2.2.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "multer": "^2.0.1",
-    "puppeteer": "^24.10.2"
+    "html-pdf-node": "^1.0.8",
+    "multer": "^2.0.1"
   },
   "author": "",
   "license": "ISC"
