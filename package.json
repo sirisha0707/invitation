@@ -4,7 +4,7 @@
   "description": "Generates pdf with given data.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node --max-old-space-size=4096 server.js"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
